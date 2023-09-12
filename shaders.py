@@ -1,3 +1,5 @@
+import glm
+
 from typing import TYPE_CHECKING
 from os.path import dirname
 
@@ -15,10 +17,11 @@ class Shaders:
 		self.setUniforms()
 
 	def setUniforms(self):
-		pass
+		self.quad['projection'].write(self.minecraft.player.projection)
+		self.quad['model'].write(glm.mat4())
 
 	def update(self):
-		pass
+		self.quad['view'].write(self.minecraft.player.view)
 
 	def getShader(self, name: str) -> 'moderngl.Program':
 		with open(f"{dirname(__file__)}/shaders/{name}.vert") as f:

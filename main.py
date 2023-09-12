@@ -6,6 +6,7 @@ import moderngl
 from settings import *
 from shaders import Shaders
 from scene import Scene
+from player import Player
 
 class MinecraftClone:
 
@@ -27,15 +28,20 @@ class MinecraftClone:
 		self.deltaTime: int = 0
 		self.time: int = 0
 
+		pygame.event.set_grab(True)
+		pygame.mouse.set_visible(False)
+
 		self.running = True
 
 		self.onInit()
 
 	def onInit(self) -> None:
+		self.player = Player(self)
 		self.shaders = Shaders(self)
 		self.scene = Scene(self)
 
 	def update(self) -> None:
+		self.player.update()
 		self.shaders.update()
 		self.scene.update()
 
