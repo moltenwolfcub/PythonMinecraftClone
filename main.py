@@ -4,6 +4,8 @@ import pygame
 import moderngl
 
 from settings import *
+from shaders import Shaders
+from scene import Scene
 
 class MinecraftClone:
 
@@ -22,13 +24,22 @@ class MinecraftClone:
 		self.context.gc_mode = 'auto'
 
 		self.clock = pygame.time.Clock()
-		self.delta_time: int = 0
+		self.deltaTime: int = 0
 		self.time: int = 0
 
 		self.running = True
 
+		self.onInit()
+
+	def onInit(self) -> None:
+		self.shaders = Shaders(self)
+		self.scene = Scene(self)
+
 	def update(self) -> None:
-		self.delta_time = self.clock.tick()
+		self.shaders.update()
+		self.scene.update()
+
+		self.deltaTime = self.clock.tick()
 		self.time = pygame.time.get_ticks()*0.001
 
 		pygame.display.set_caption(f"Minecraft Clone - {self.clock.get_fps() :.0f} FPS")
@@ -36,23 +47,25 @@ class MinecraftClone:
 	def render(self) -> None:
 		self.context.clear(color=BG_COLOR)
 
+		self.scene.render()
+
 		pygame.display.flip()
 
-	def handle_events(self) -> None:
+	def handleEvents(self) -> None:
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				self.running = False
 			elif event.type == pygame.KEYDOWN:
-				self._handle_keydown_events(event)
+				self._handleKeydownEvents(event)
 
-	def _handle_keydown_events(self, event: pygame.event.Event) -> None:
+	def _handleKeydownEvents(self, event: pygame.event.Event) -> None:
 		if event.key == pygame.K_ESCAPE:
 			self.running = False
 
 
 	def run(self) -> None:
 		while self.running:
-			self.handle_events()
+			self.handleEvents()
 			self.update()
 			self.render()
 		
