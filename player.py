@@ -34,7 +34,7 @@ class Player(Camera):
 			return
 
 		pressed = pygame.key.get_pressed()
-		velocity = MOVEMENT_SPEED * self.minecraft.deltaTime
+		velocity: float = MOVEMENT_SPEED * self.minecraft.deltaTime
 		if pressed[pygame.K_w]:
 			self.moveForward(velocity)
 		if pressed[pygame.K_s]:
