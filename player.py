@@ -20,6 +20,9 @@ class Player(Camera):
 		super().update()
 
 	def mouseControls(self) -> None:
+		if not self.minecraft.mouseCaught:
+			return
+
 		dx, dy = pygame.mouse.get_rel()
 		if dx:
 			self.rotYaw(dx * SENSITIVITY)
@@ -27,6 +30,9 @@ class Player(Camera):
 			self.rotPitch(dy * SENSITIVITY)
 
 	def keyboardControls(self) -> None:
+		if not self.minecraft.mouseCaught:
+			return
+
 		pressed = pygame.key.get_pressed()
 		velocity = MOVEMENT_SPEED * self.minecraft.deltaTime
 		if pressed[pygame.K_w]:

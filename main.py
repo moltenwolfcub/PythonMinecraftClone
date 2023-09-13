@@ -17,7 +17,7 @@ class MinecraftClone:
 		pygame.display.gl_set_attribute(pygame.GL_CONTEXT_PROFILE_MASK, pygame.GL_CONTEXT_PROFILE_CORE)
 		pygame.display.gl_set_attribute(pygame.GL_DEPTH_SIZE, 24)
 
-		pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), flags= pygame.OPENGL | pygame.DOUBLEBUF)
+		pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), flags= pygame.OPENGL | pygame.DOUBLEBUF | pygame.RESIZABLE)
 		pygame.display.set_caption("Minecraft Clone - 0 FPS")
 
 		self.context = moderngl.create_context()
@@ -28,8 +28,7 @@ class MinecraftClone:
 		self.deltaTime: int = 0
 		self.time: int = 0
 
-		pygame.event.set_grab(True)
-		pygame.mouse.set_visible(False)
+		self.mouseCaught: bool = True
 
 		self.running = True
 
@@ -41,6 +40,9 @@ class MinecraftClone:
 		self.scene = Scene(self)
 
 	def update(self) -> None:
+		pygame.event.set_grab(self.mouseCaught)
+		pygame.mouse.set_visible(not self.mouseCaught)
+
 		self.player.update()
 		self.shaders.update()
 		self.scene.update()
@@ -66,7 +68,18 @@ class MinecraftClone:
 
 	def _handleKeydownEvents(self, event: pygame.event.Event) -> None:
 		if event.key == pygame.K_ESCAPE:
-			self.running = False
+			if not self.mouseCaught:
+				self.toggleMouseCaught()
+			else:
+				self.running = False
+		elif event.key == pygame.K_t:
+			self.toggleMouseCaught()
+
+	def toggleMouseCaught(self) -> None:
+		w,h = pygame.display.get_window_size()
+		pygame.mouse.set_pos(w/2, h/2)
+		pygame.mouse.get_rel()
+		self.mouseCaught = not self.mouseCaught
 
 
 	def run(self) -> None:
