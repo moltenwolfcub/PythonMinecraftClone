@@ -48,3 +48,9 @@ class QuadMesh(BaseMesh):
 			(0, 1, 0), (1, 1, 0), (0, 0, 1),
 		]
 		return numpy.hstack([verticies, colors], dtype='float32')
+
+
+
+if __name__ == '__main__':
+	from main import main
+	main()

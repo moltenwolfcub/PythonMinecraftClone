@@ -66,3 +66,9 @@ class Camera:
 
 	def moveBack(self, velocity: float):
 		self.pos -= self.movementForwards * velocity
+
+
+
+if __name__ == '__main__':
+	from main import main
+	main()

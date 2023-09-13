@@ -18,3 +18,9 @@ class Scene:
 
 	def render(self) -> None:
 		self.quad.render()
+
+
+
+if __name__ == '__main__':
+	from main import main
+	main()

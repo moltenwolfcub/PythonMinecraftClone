@@ -94,6 +94,9 @@ class MinecraftClone:
 		pygame.quit()
 		sys.exit()
 
-if __name__ == '__main__':
+def main() -> None:
 	instance = MinecraftClone()
 	instance.run()
+
+if __name__ == '__main__':
+	main()

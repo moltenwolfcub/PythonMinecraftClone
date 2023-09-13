@@ -47,3 +47,9 @@ class Player(Camera):
 			self.moveDown(velocity)
 		if pressed[pygame.K_SPACE]:
 			self.moveUp(velocity)
+
+
+
+if __name__ == '__main__':
+	from main import main
+	main()

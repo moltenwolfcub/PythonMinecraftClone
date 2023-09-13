@@ -31,3 +31,9 @@ class Shaders:
 			fragment = f.read()
 		
 		return self.minecraft.context.program(vertex_shader=vertex,fragment_shader=fragment)
+
+
+
+if __name__ == '__main__':
+	from main import main
+	main()

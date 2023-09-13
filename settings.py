@@ -16,3 +16,9 @@ MAX_PITCH: float =  glm.radians(89)
 MOVEMENT_SPEED: float = 0.005
 ROATATION_SPEED: float = 0.003
 SENSITIVITY: float = 0.005
+
+
+
+if __name__ == '__main__':
+	from main import main
+	main()
