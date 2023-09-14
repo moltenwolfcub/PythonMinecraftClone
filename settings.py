@@ -17,6 +17,8 @@ MOVEMENT_SPEED: float = 0.005
 ROATATION_SPEED: float = 0.003
 SENSITIVITY: float = 0.005
 
+CHUNK_SIZE: int = 32
+CHUNK_VOLUME: int = CHUNK_SIZE*CHUNK_SIZE*CHUNK_SIZE
 
 
 if __name__ == '__main__':

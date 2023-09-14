@@ -1,9 +1,13 @@
+from typing import TYPE_CHECKING
+
 import numpy
 
-from typing import TYPE_CHECKING
+from chunkMeshBuilder import buildChunkMesh
 
 if TYPE_CHECKING:
 	import moderngl
+
+	from chunkManager import Chunk
 	from main import MinecraftClone
 
 class BaseMesh:
@@ -35,7 +39,7 @@ class QuadMesh(BaseMesh):
 
 		self.shader = self.minecraft.shaders.quad
 		self.vboFormat = '3f 3f'
-		self.attributes = ('in_position', 'in_color')
+		self.attributes = ('inPos', 'inColor')
 		self.vao = self.getVao()
 
 	def getVertexData(self) -> numpy.ndarray:
@@ -48,6 +52,27 @@ class QuadMesh(BaseMesh):
 			(0, 1, 0), (1, 1, 0), (0, 0, 1),
 		]
 		return numpy.hstack([verticies, colors], dtype='float32')
+	
+class ChunkMesh(BaseMesh):
+	def __init__(self, chunk: 'Chunk') -> None:
+		super().__init__()
+
+		self.chunk: 'Chunk' = chunk
+		self.minecraft: 'MinecraftClone' = self.chunk.minecraft
+		self.shader = self.minecraft.shaders.chunk
+		self.context = self.minecraft.context
+
+		self.vboFormat = '3u1 1u1 1u1'
+		self.formatSize = sum(int(fmt[:1]) for fmt in self.vboFormat.split())
+		self.attributes = ('inPos', 'inBlockId', 'inFaceId')
+		self.vao = self.getVao()
+
+	def getVertexData(self) -> numpy.ndarray:
+		mesh = buildChunkMesh(
+			self.chunk.blocks,
+			self.formatSize
+		)
+		return mesh
 
 
 

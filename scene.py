@@ -1,7 +1,6 @@
-
-
 from typing import TYPE_CHECKING
 
+from chunkManager import Chunk
 from meshes import QuadMesh
 
 if TYPE_CHECKING:
@@ -11,12 +10,14 @@ class Scene:
 	def __init__(self, mc: 'MinecraftClone') -> None:
 		self.minecraft: 'MinecraftClone' = mc
 
-		self.quad: QuadMesh = QuadMesh(self.minecraft)
+		self.chunk: Chunk = Chunk(self.minecraft)
+		self.quad = QuadMesh(mc)
 	
 	def update(self) -> None:
 		pass
 
 	def render(self) -> None:
+		# self.chunk.render()
 		self.quad.render()
 
 

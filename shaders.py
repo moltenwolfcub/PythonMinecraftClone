@@ -1,10 +1,11 @@
-import glm
-
-from typing import TYPE_CHECKING
 from os.path import dirname
+from typing import TYPE_CHECKING
+
+import glm
 
 if TYPE_CHECKING:
 	import moderngl
+
 	from main import MinecraftClone
 
 class Shaders:
@@ -13,6 +14,7 @@ class Shaders:
 		self.minecraft: 'MinecraftClone' = mc
 
 		self.quad: 'moderngl.Program' = self.getShader(name="quad")
+		self.chunk: 'moderngl.Program' = self.getShader(name="chunk")
 		
 		self.setUniforms()
 
@@ -20,8 +22,12 @@ class Shaders:
 		self.quad['projection'].write(self.minecraft.player.projection)
 		self.quad['model'].write(glm.mat4())
 
+		self.chunk['projection'].write(self.minecraft.player.projection)
+		self.chunk['model'].write(glm.mat4())
+
 	def update(self):
 		self.quad['view'].write(self.minecraft.player.view)
+		self.chunk['view'].write(self.minecraft.player.view)
 
 	def getShader(self, name: str) -> 'moderngl.Program':
 		with open(f"{dirname(__file__)}/shaders/{name}.vert") as f:

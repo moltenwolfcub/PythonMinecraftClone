@@ -9,7 +9,7 @@ if TYPE_CHECKING:
 	from main import MinecraftClone
 
 class Player(Camera):
-	def __init__(self, minecraft: 'MinecraftClone', pos: glm.vec3=glm.vec3(0,0,1), yaw: float=-90, pitch: float=0) -> None:
+	def __init__(self, minecraft: 'MinecraftClone', pos: glm.vec3=glm.vec3(CHUNK_SIZE/2, CHUNK_SIZE, 1.5 * CHUNK_SIZE), yaw: float=-90, pitch: float=0) -> None:
 		super().__init__(pos, yaw, pitch)
 		self.minecraft: 'MinecraftClone' = minecraft
 
