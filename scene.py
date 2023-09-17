@@ -17,8 +17,8 @@ class Scene:
 		pass
 
 	def render(self) -> None:
-		# self.chunk.render()
-		self.quad.render()
+		self.chunk.render()
+		# self.quad.render()
 
 
 
