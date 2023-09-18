@@ -10,7 +10,7 @@ def buildChunkMesh(chunkBlocks: 'numpy.ndarray', formatSize: int) -> 'numpy.ndar
 	for x in range(CHUNK_SIZE):
 		for y in range(CHUNK_SIZE):
 			for z in range(CHUNK_SIZE):
-				blockId = x + CHUNK_SIZE*z + CHUNK_SIZE*CHUNK_SIZE*y
+				blockId = chunkBlocks[x + CHUNK_SIZE*z + CHUNK_SIZE*CHUNK_SIZE*y]
 				if blockId == 0:
 					continue
 
