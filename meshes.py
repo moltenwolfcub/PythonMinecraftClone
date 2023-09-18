@@ -62,11 +62,6 @@ class ChunkMesh(BaseMesh):
 		self.shader = self.minecraft.shaders.chunk
 		self.context = self.minecraft.context
 
-		#tmp
-		# self.vboFormat = '3f 3f'
-		# self.attributes = ('inPos', 'inBlockId')
-		#end tmp
-
 		self.vboFormat = '3u1 1u1 1u1'
 		self.formatSize = sum(int(fmt[:1]) for fmt in self.vboFormat.split())
 		self.attributes = ('inPos', 'inBlockId', 'inFaceId')
@@ -79,25 +74,6 @@ class ChunkMesh(BaseMesh):
 			self.formatSize
 		)
 		return mesh
-# class ChunkMesh(BaseMesh):
-#     def __init__(self, chunk):
-#         super().__init__()
-#         self.app = chunk.minecraft
-#         self.chunk = chunk
-#         self.ctx = self.app.context
-#         self.program = self.app.shaders.chunk
-
-#         self.vbo_format = '3u1 1u1 1u1'
-#         self.format_size = sum(int(fmt[:1]) for fmt in self.vbo_format.split())
-#         self.attrs = ('in_position', 'voxel_id', 'face_id')
-#         self.vao = self.getVao()
-
-#     def get_vertex_data(self):
-#         mesh = buildChunkMesh(
-#             chunk_voxels=self.chunk.voxels,
-#             format_size=self.format_size,
-#         )
-#         return mesh
 
 
 

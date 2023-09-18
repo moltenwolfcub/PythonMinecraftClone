@@ -13,20 +13,15 @@ class Shaders:
 	def __init__(self, mc: 'MinecraftClone') -> None:
 		self.minecraft: 'MinecraftClone' = mc
 
-		self.quad: 'moderngl.Program' = self.getShader(name="quad")
 		self.chunk: 'moderngl.Program' = self.getShader(name="chunk")
 		
 		self.setUniforms()
 
 	def setUniforms(self):
-		self.quad['projection'].write(self.minecraft.player.projection)
-		self.quad['model'].write(glm.mat4())
-
 		self.chunk['projection'].write(self.minecraft.player.projection)
 		self.chunk['model'].write(glm.mat4())
 
 	def update(self):
-		self.quad['view'].write(self.minecraft.player.view)
 		self.chunk['view'].write(self.minecraft.player.view)
 
 	def getShader(self, name: str) -> 'moderngl.Program':

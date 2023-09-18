@@ -11,14 +11,12 @@ class Scene:
 		self.minecraft: 'MinecraftClone' = mc
 
 		self.chunk: Chunk = Chunk(self.minecraft)
-		self.quad = QuadMesh(mc)
 	
 	def update(self) -> None:
 		pass
 
 	def render(self) -> None:
 		self.chunk.render()
-		# self.quad.render()
 
 
 
